@@ -38,3 +38,9 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: build/reports/kover/report.xml
+
+      - name: Run codacy-coverage-reporter
+        uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: build/reports/kover/report.xml
