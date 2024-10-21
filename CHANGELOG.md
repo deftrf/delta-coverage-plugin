@@ -3,15 +3,18 @@
 ## 2.5.0
 
 ### Fixed
+
 - #133 Fixed configuration cache compatibility issue.
 
 ### Changed
+
 - Min supported Gradle version is **7.0**.
 
 
 ## 2.4.0
 
 ### Changed
+
 - Source code paths are inferred from sourceSets if no custom paths are specified.
 - `Markdown` and `Console` reports:
   - now don't have `source` column.
@@ -21,21 +24,25 @@
 - Console report now enabled by the default.
 
 ### Added
+
 - Added GitHub Action for posting delta coverage report to PR comment. See [docs](./actions/delta-coverage-report/README.md)
 
 
 ## 2.3.0
 
 ### Added
+
 - Added markdown report.
 
 ### Dependency updates
+
 - Updated JaCoCo dependency to [0.8.12](https://github.com/jacoco/jacoco/releases/tag/v0.8.12)
 
 
 ## 2.2.1
 
 ### Fixed
+
 - Fixed exclude classes ant pattern matching.
 - Fixed up-to-date state for diff generation by native git. 
   Now the task is considered not up-to-date if classes have been changed.
@@ -44,40 +51,50 @@
 ## 2.2.0
 
 ### Added
+
 - Added native Git support #53.
 
 ### Fixed
+
 - Fixed diff generation by JGit client. Now it ignores whitespaces.
 - Fixed broken console report layout when class name is too long #92.
 
 ### Changed
+
 - HTML report link is printed after console report.
 
 
 ## 2.1.0
 
 ### Added
+
 - Render clickable HTML report path in console output.
 - Added console report. 
 
 ### Fixed
+
 - File changes detecting when there are few classes with similar names in different packages. 
 
 
 ## 2.0.2
 
 ### Fixed
+
 - Fixed deltaCoverage task inputs. Now the task is dependent only on required files.
 - #46 Fixed build failure when total branches count is 0. 
 
 
 ## 2.0.1
+
 ### Fixed
+
 - Fixed build failure when coverage rules are satisfied and coverage engine is INTELLIJ.
 
 
 ## 2.0.0
+
 ### Added
+
 - Added support of [Intellij coverage](https://github.com/JetBrains/intellij-coverage).
 
 ### Breaking changes
@@ -101,27 +118,36 @@
   See README for the new API.
 
 ### Changed
+
 - Min supported Gradle version is **5.6**.
 - CSV report generation is deprecated and will be removed in the next major release.
 
 ### Dependency updates
+
 - Official support of Gradle **8.5**.
 
 
 ## 1.3.0
+
 ### Dependency updates
+
 - Official support of Gradle 8.4
 - Updated JaCoCo dependency to [0.8.11](https://github.com/jacoco/jacoco/releases/tag/v0.8.11)
 
 
 ## 1.2.0
+
 - Support java records
+
 ### Dependency updates
+
 - Official support of Gradle 8.3
 
 
 ## 1.1.0
+
 ### Added
+
 - Ignore coverage violation if a coverage entity count is less than threshold
   <details>
     <summary>Usage example</summary>
@@ -158,7 +184,9 @@
 
 
 ## 1.0.0
+
 ### Added
+
 - `Delta Coverage` plugin applies JaCoCo plugin to a project and all it's subprojects
   - could be disabled by adding property to `gradle.properties`:
   ```
@@ -168,6 +196,7 @@
 - Support of classes exclusion #69
 
 ### Changed
+
 - Official support Gradle `8.1.+`.
 - Updated JaCoCo dependency to [0.8.9](https://github.com/jacoco/jacoco/releases/tag/v0.8.9)
 - Min supported Gradle is `5.1`.
