@@ -6,11 +6,10 @@ on:
       - '*'
 
 jobs:
-
   build-and-test:
     uses: ./.github/workflows/base-ci.yml
     permissions:
-      contents: read
-      issues: read
+      contents: write
+      issues: write
       checks: write
       pull-requests: write

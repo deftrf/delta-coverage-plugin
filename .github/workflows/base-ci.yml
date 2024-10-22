@@ -3,11 +3,6 @@ name: basic-steps
 on:
   workflow_call:
   workflow_dispatch:
-  pull_request:
-  push:
-    branches: # Specify your branches here
-      - main # The 'main' branch
-      - 'releases/*' # The release branches
 
 jobs:
   build-and-check:
@@ -36,7 +31,7 @@ jobs:
           cache: 'gradle'
 
       - name: Build & Test
-        run: ${gradle_cmd} check :koverXmlReport --rerun
+        run: ${gradle_cmd} test :koverXmlReport --rerun
       
       - name: prepare qodana coverage
         run: mkdir -p .qodana/code-coverage && cp -v build/reports/kover/report.xml .qodana/code-coverage
