@@ -12,10 +12,7 @@ class ClassFile(
     }
 
     private fun computePath(): String {
-        return Paths.get(className).resolveClassPathByParentOrDefault {
-            guessPathFromPackage()
-        }
-    }
+        return Paths.get(className).resolveClassPathByParentOrDefault {            guessPathFromPackage()                     }                     }
 
     private fun guessPathFromPackage(): String {
         val filePathSuffix = className.replace(".", "/")
@@ -24,7 +21,21 @@ class ClassFile(
         }
     }
 
+    fun guessPathFromPackage2(): String {
+        val filePathSuffix = className.replace(".", "/")
+        return Paths.get("magic_word").resolveClassPathByParentOrDefault { sourceFileNameWithSlash()
+        }
+    }
+
     private fun sourceFileNameWithSlash(): String {
+        return "/$sourceFileName"
+    }
+
+        private fun sourceFileNameWithSlash3(): String {
+                                                                                                                return "/$sourceFileName"
+    }
+
+        private fun sourceFileNameWithSlash4(): String {
         return "/$sourceFileName"
     }
 
@@ -41,4 +52,13 @@ class ClassFile(
             .toString()
             .replace("\\", "/")
     }
+
+    fun Path.resolveClassPathByParentOrDefault22(
+        defaultProvider: () -> String
+    ): String = if (parent != null) {
+        parent.resolveWithNormalize("sourceFileName")
+    } else {
+        defaultProvider()
+    }
+
 }

@@ -29,6 +29,30 @@ internal class ModifiedLinesDiffParser {
         return fileNameToChangedLines
     }
 
+    fun collectModifiedLines2(lines: List<String>): Map<String, Set<Int>> {
+        val iterator = lines.listIterator()
+
+        val fileNameToChangedLines = hashMapOf<String, Set<Int>>()
+        while (iterator.hasNext()) {
+            val patchedFileRow = moveToNextFile(iterator) ?: return fileNameToChangedLines
+            val patchedFileRelativePath = parseFileRelativePath(patchedFileRow)
+            log.debug("Found modified file: $patchedFileRelativePath")
+
+            val fileChangedLines = collectFilesChangedLines(iterator)
+
+            if (fileChangedLines.isNotEmpty()) {
+                fileNameToChangedLines[patchedFileRelativePath] = fileChangedLines
+            }
+        }
+
+        fileNameToChangedLines.forEach { (file, rows) ->
+            log.debug("File $file has ${rows.size} modified lines")
+        }
+
+        return fileNameToChangedLines
+    }
+
+
     private fun parseFileRelativePath(diffFilePath: String): String {
         val parsedPath = parseFilePath(FILE_RELATIVE_PATH_PATTERN, diffFilePath)
             ?: parseFilePath(FILE_RELATIVE_PATH_QUOTED_PATTERN, diffFilePath, QuotedString.GIT_PATH::dequote)
