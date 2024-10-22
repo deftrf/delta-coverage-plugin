@@ -36,16 +36,16 @@ jobs:
       - name: prepare qodana coverage
         run: mkdir -p .qodana/code-coverage && cp -v build/reports/kover/report.xml .qodana/code-coverage
 
-      - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@v2024.1
-        with:
-          pr-mode: false
-        env:
-          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_1881314241 }}
-          QODANA_ENDPOINT: 'https://qodana.cloud'
-
       - name: Run codacy-coverage-reporter
         uses: codacy/codacy-coverage-reporter-action@master
         with:
           project-token: 8bc9b7a5d6404d05b9c93dd552c45def
           coverage-reports: build/reports/kover/report.xml
+
+      - name: 'Qodana Scan'
+        uses: JetBrains/qodana-action@v2024.2
+        with:
+          pr-mode: false
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_1881314241 }}
+          QODANA_ENDPOINT: 'https://qodana.cloud'
