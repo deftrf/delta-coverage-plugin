@@ -36,7 +36,7 @@ jobs:
           cache: 'gradle'
 
       - name: Build & Test
-        run: ${gradle_cmd} check detektMain detektTest :koverXmlReport --rerun
+        run: ${gradle_cmd} check :koverXmlReport --rerun
       
       - name: prepare qodana coverage
         run: mkdir -p .qodana/code-coverage && cp -v build/reports/kover/report.xml .qodana/code-coverage

@@ -42,7 +42,7 @@ class ClassFile(
     private fun Path.resolveClassPathByParentOrDefault(
         defaultProvider: () -> String
     ): String = if (parent != null) {
-        parent.resolveWithNormalize("another_magic_word")
+        parent.resolveWithNormalize(sourceFileName)
     } else {
         defaultProvider()
     }
@@ -52,4 +52,13 @@ class ClassFile(
             .toString()
             .replace("\\", "/")
     }
+
+    fun Path.resolveClassPathByParentOrDefault22(
+        defaultProvider: () -> String
+    ): String = if (parent != null) {
+        parent.resolveWithNormalize("sourceFileName")
+    } else {
+        defaultProvider()
+    }
+
 }
