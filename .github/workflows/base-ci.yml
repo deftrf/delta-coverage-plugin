@@ -7,6 +7,11 @@ on:
 jobs:
 
   build-and-check:
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: write
+
     runs-on: ubuntu-latest
 
     env:
@@ -15,6 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
 
       - name: Set up JDK 11
@@ -39,6 +45,17 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: build/reports/kover/report.xml
       
+      - name: prepare qodana coverage
+        run: mkdir -p .qodana/code-coverage && cp -v build/reports/kover/report.xml .qodana/code-coverage
+
+      - name: 'Qodana Scan'
+        uses: JetBrains/qodana-action@v2024.1
+        with:
+          pr-mode: false
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_1881314241 }}
+          QODANA_ENDPOINT: 'https://qodana.cloud'
+
       - name: Run codacy-coverage-reporter
         uses: codacy/codacy-coverage-reporter-action@master
         with:
